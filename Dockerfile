@@ -18,8 +18,11 @@ RUN sed -ir "s/ENABLED=0/ENABLED=1/" /etc/default/stunnel4
 VOLUME ["/etc/stunnel"]
 
 ADD conf/stunnel.conf /etc/stunnel/stunnel.conf
-ADD conf/stunnel.pem /etc/stunnel/stunnel.pem
+ADD conf/stunnel.cert /etc/stunnel/stunnel.cert
+ADD conf/stunnel.key /etc/stunnel/stunnel.key
+ADD run.sh /usr/bin/run
+RUN chmod +x /usr/bin/run
 
 EXPOSE 443
 
-CMD ["service", "stunnel4", "start" ]
+CMD ["/usr/bin/run"]
